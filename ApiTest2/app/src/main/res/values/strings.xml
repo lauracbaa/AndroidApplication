@@ -20,5 +20,8 @@
         <string name="error_email_exists">Email Already Exists</string>
         <string name="error_password_match">Password Does Not Matches</string>
         <string name="error_valid_email_password">Wrong Email or Password</string>
-    </resources>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+</resources>
 
