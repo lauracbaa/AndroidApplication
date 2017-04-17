@@ -1,4 +1,4 @@
-package com.example.markohare.apitest2.Models;
+package com.example.markohare.apitest2;
 
 import java.util.List;
 
@@ -7,6 +7,7 @@ import java.util.List;
  */
 
 public class TvShow {
+
 
     final private String IMG_BACKDROP_BASE_URL = "http://image.tmdb.org/t/p/w300";
     final private String IMG_POSTER_BASE_URL = "http://image.tmdb.org/t/p/w342";
@@ -25,12 +26,19 @@ public class TvShow {
     private double popularity;
     private String posterPath;
     private List<Season> seasons;
-    public static class Season{
+
+    public String getIMG_POSTER_BASE_URL() {
+        return IMG_POSTER_BASE_URL;
+    }
+
+    public static class Season {
         private String airDate;
         private int episodeCount;
         private int id;
         private String posterPath;
         private int number;
+
+
 
         public String getAirDate() {
             return airDate;
@@ -86,7 +94,7 @@ public class TvShow {
     }
 
     public void setBackdropPath(String backdropPath) {
-        this.backdropPath = IMG_BACKDROP_BASE_URL+backdropPath;
+        this.backdropPath = IMG_BACKDROP_BASE_URL + backdropPath;
     }
 
     public int[] getEpRuntime() {
@@ -174,7 +182,7 @@ public class TvShow {
     }
 
     public void setPosterPath(String posterPath) {
-        this.posterPath = IMG_POSTER_BASE_URL+posterPath;
+        this.posterPath = posterPath;
     }
 
     public List<Season> getSeasons() {
@@ -184,8 +192,6 @@ public class TvShow {
     public void setSeasons(List<Season> seasons) {
         this.seasons = seasons;
     }
-
-
 
 
 }

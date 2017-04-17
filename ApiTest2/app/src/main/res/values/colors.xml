@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#0000cd</color>
-    <color name="colorPrimaryDark">#0000cd</color>
-    <color name="colorAccent">#ffffff</color>
+
     <color name="colorBackground">#87cefa</color>
     <color name="colorText">#fffafa</color>
     <color name="colorTextHint">#b9a9d6</color>
     <color name="primary_material_light">#ca7b1fa2</color>
     <color name="accent_material_light">#b388ff</color>
     <color name="primary_dark_material_light">#9fa8da</color>
+    <color name="colorPrimary">#F50057</color>
+    <color name="colorPrimaryDark">#F50057</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="viewBg">#f1f5f8</color>
+    <color name="tvshow_title">#4c4c4c</color>
 </resources>

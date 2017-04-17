@@ -1,7 +1,7 @@
 <resources>
 
     <string name="action_settings">Refresh</string>
-    <string name = "action_search">Search</string>
+    <string name ="action_search">Search</string>
     <string name="app_name">WHERE WAS I?</string>
     <string name="text_accounts">All Accounts</string>
         <string name="hint_name">Name</string>
@@ -22,6 +22,13 @@
         <string name="error_valid_email_password">Wrong Email or Password</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_setting">Settings</string>
+    <string name="add_to_favourites">Add to Favourites</string>
+    <string name="go_to_favourites">Go to Favourites</string>
+    <string name="backdrop_title"></string>
+    <string name="backdrop_subtitle">This season\'s top Shows</string>
+    <string name="remove_from_favourites">Remove from favourites</string>
+    <string name="go_back_to_popular_selections">Go back to Popular Selections</string>
 
 </resources>
 

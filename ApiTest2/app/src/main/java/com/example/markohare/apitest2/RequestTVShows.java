@@ -3,8 +3,6 @@ package com.example.markohare.apitest2;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.example.markohare.apitest2.Models.TvShow;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

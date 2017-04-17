@@ -1,4 +1,5 @@
-package com.example.markohare.apitest2.Models;
+package com.example.markohare.apitest2;
+
 
 import android.os.AsyncTask;
 import android.util.Log;
@@ -18,18 +19,19 @@ import java.net.URL;
 /**
  * Created by Mark O'Hare on 06/04/2017.
  *
- * Returns current popular shows
- * Works similarly to the search JSONTask method, except it iterates over a selection of objects
- * from a JSONArray
+ * Searches for a TV Show via a key word
+ * Returns minimal info but can be used to retrieve the ID which can then be used to get more
+ * info
+ *
  */
 
-public class PopularShows extends AsyncTask<String, String, JSONArray>{
+public class SearchTVShow extends AsyncTask<String, String, TvShow> {
 
-    private final String REQUEST_POPULAR="https://api.themoviedb.org/3/discover/tv?api_key=872b836efb69a145906d151fc7e865d1&language=en-UK&sort_by=popularity.desc&page=1&timezone=UK/London&include_null_first_air_dates=false";
+    private final String REQUEST_KEYWORD_SEARCH = "https://api.themoviedb.org/3/search/tv?api_key=872b836efb69a145906d151fc7e865d1&language=en-UK&query=";
 
     //-------Interface to handle the result of the request-------//
     public interface AsyncResponse{
-        void processFinish(JSONArray result);
+        void processFinish(TvShow result);
     }
 
     //Interface variable for constructor
@@ -37,19 +39,21 @@ public class PopularShows extends AsyncTask<String, String, JSONArray>{
 
     //When instantiating object, AsyncResponse should be passed in as 'new AsyncResponse()'
     //This will automatically generate the 'processFinish' method
-    public PopularShows(AsyncResponse delegate){
+    public SearchTVShow(AsyncResponse delegate){
         this.delegate = delegate;
     }
 
     //Standard AsyncTask methods that build your TvShow object based on the URL request
     @Override
-    protected JSONArray doInBackground(String... params) {
+    protected TvShow doInBackground(String... params) {
         HttpURLConnection connection = null;
         BufferedReader reader = null;
+        TvShow tvShow = new TvShow();
+        String keywordSearch = REQUEST_KEYWORD_SEARCH + params[0].replaceAll(" ","%20");
 
         try{
 
-            URL gettvShowsUrl = new URL(params[0]);
+            URL gettvShowsUrl = new URL(keywordSearch);
             connection = (HttpURLConnection) gettvShowsUrl.openConnection();
 
             InputStream stream = connection.getInputStream();
@@ -65,10 +69,21 @@ public class PopularShows extends AsyncTask<String, String, JSONArray>{
 
             String JSONTvShow = buffer.toString();
 
-            JSONObject parentObj = new JSONObject(JSONTvShow);
-            JSONArray popShows = parentObj.getJSONArray("results");
+            Log.d("JSON_CONTENTS", JSONTvShow);
 
-            return popShows;
+            JSONObject parentObj = new JSONObject(JSONTvShow);
+            JSONArray searchResultsArr = parentObj.getJSONArray("results");
+            JSONObject searchResultsJSON = searchResultsArr.getJSONObject(0);
+
+            tvShow.setName(searchResultsJSON.getString("name"));
+            tvShow.setId(searchResultsJSON.getInt("id"));
+            tvShow.setBackdropPath(searchResultsJSON.getString("backdrop_path"));
+            tvShow.setOverview(searchResultsJSON.getString("overview"));
+            tvShow.setPopularity(searchResultsJSON.getDouble("popularity"));
+            tvShow.setPosterPath(searchResultsJSON.getString("poster_path"));
+
+
+            return tvShow;
 
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -95,12 +110,13 @@ public class PopularShows extends AsyncTask<String, String, JSONArray>{
     }
 
     @Override
-    protected void onPostExecute(JSONArray result){
+    protected void onPostExecute(TvShow result){
         super.onPostExecute(result);
-        Log.d("JSON_STRING", result.toString());
+
         delegate.processFinish(result);
     }
 
 
 }
+
 
